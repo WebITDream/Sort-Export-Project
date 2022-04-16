@@ -1,64 +1,60 @@
 #include <iostream>
-#include <sstream>
 #include <fstream>
-#include <ctime> 
+#include <ctime>
 
 using namespace std;
 
-void openFile(ifstream&, string);
-void processFile(ifstream&);
-
-int main(){
-// Initializare proiect
-    ifstream file;
-    openFile(file, "text.txt");
-
-
-    // procesare fisier;
-    processFile(file);
-
-
-}
-
-void processFile(ifstream& file){
-    string line, word;
-    istringstream iss;
-
-    string keyword[24] = {"anicacjtm", "/bukr", "/napoleon", "bukr", "cityhome", "IC", "insula", "interviu", "msb", "napoleon", "radu", "rveOR", "rve-or", "rve-beta", "rvesb", "rveTM", "rve-tm", "omma", "pcma", "pima", "vnma", "/rveOR", "/rve-or", "/rve-tm"};
+int main()
+{
+  ifstream ifs("text.txt");
 
     ofstream exportFile;
     exportFile.open("export.txt");
 
-    while(!file.eof()){
-        getline(file, line);
-// Ia fiecare linie si imparte in cuvinte
+  string word1 = "/bukr";
+  string word2 = "/napoleon";
+  string word3 = "/rve-tm";
+  string word4 = "/rve-or";
+  string word5 = "/rveOR";
+  string word6 = "rve-tm";
+  string word7 = "rveTM";
+  string word8 = "rve-beta";
 
-        iss.clear();
-        iss.str(line);
-            while(iss.good()){
-                iss >> word;
-                // verificarea daca este X cuvant, daca este se afiseaza
-                for(int i=0;i<=22;i++)
-                    if(word == keyword[i]){
-                        exportFile << word << endl;
-                    }
-                }
-            }
-            time_t tmNow = time(0);
-            char *dt = ctime(&tmNow);
-            exportFile << "Data si timpul cand a fost efectuat raportul: " << dt << endl;
-            cout << "Apasa orice tasta pentru a parasii executabilulul, rezultatul il poti gasi in fisierul: export.txt !";
-            cin.get();
-}
+  string line;
 
+  while( getline(ifs, line ))
+  {
+    size_t pos = line.find(word1);
+    if ( pos != string::npos)
+      exportFile << line << endl;
 
+    size_t pos1 = line.find(word2);
+    if ( pos1 != string::npos)
+      exportFile << line << endl;
 
-void openFile(ifstream& file, string fname){
-    file.open(fname);
-    if (file.is_open()){
-        
-    }else {
-        cout << "Ceva nu a mers" << endl;
-        exit(-1);
-    }
+          size_t pos2 = line.find(word3);
+    if ( pos2 != string::npos)
+      exportFile << line << endl;
+      
+          size_t pos4 = line.find(word4);
+    if ( pos4 != string::npos)
+      exportFile << line << endl;
+
+          size_t pos5 = line.find(word5);
+    if ( pos5 != string::npos)
+      exportFile << line << endl;
+
+          size_t pos6 = line.find(word6);
+    if ( pos6 != string::npos)
+      exportFile << line << endl;
+
+          size_t pos7 = line.find(word7);
+    if ( pos7 != string::npos)
+      exportFile << line << endl;
+
+          size_t pos8 = line.find(word8);
+    if ( pos8 != string::npos)
+      exportFile << line << endl;
+
+  }
 }
